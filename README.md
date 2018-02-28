@@ -2,8 +2,8 @@
 
 This is the report for
 
- + Firstname Lastname, `stil_id`
- + ...
+ + Sofi Flink, `bmp13sfl@student.lu.se`
+ + Simon Tenggren, `si6187te-s@student.lu.se`
 
 We solved this project on our own, except for:
 
