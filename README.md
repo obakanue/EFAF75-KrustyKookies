@@ -13,10 +13,10 @@ We solved this project on our own, except for:
 
 ## ER-design
 
-The model is in the file [`Krusty Kookie AB UML.png`](Krusty Kookie AB UML.png):
+The model is in the file [`Krusty Kookie AB UML.png`](Krusty_Kookie_AB UML.png):
 
 <center>
-    <img src="Krusty Kookie AB UML.png" width="100%">
+    <img src="Krusty Kookie AB UMLv2.png" width="100%">
 </center>
 
 (The image above describes the model from lecture 4, you
