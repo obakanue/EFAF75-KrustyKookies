@@ -10,7 +10,7 @@ CREATE TABLE ingredients	(
 	unit	 	TEXT,
 	amount	 	DOUBLE(12,2),
 	date_of_deliv	DATE,
-	size_of_deliv	DATE,
+	size_of_deliv	DOUBLE(12, 2),
 	PRIMARY KEY (ing_name)
 	);
 	
