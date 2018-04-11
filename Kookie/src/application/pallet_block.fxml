@@ -5,16 +5,15 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="218.0" prefWidth="249.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="218.0" prefWidth="249.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BlockController">
    <children>
-      <TextField layoutX="34.0" layoutY="58.0" />
+      <TextField fx:id="txtRecipe" layoutX="34.0" layoutY="58.0" />
       <Text layoutX="34.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BLOCK PALLETS" />
       <Text layoutX="34.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipe:" />
-      <TextField layoutX="34.0" layoutY="106.0" prefHeight="25.0" prefWidth="76.0" />
-      <Text layoutX="34.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TIme span:" />
-      <TextField layoutX="129.0" layoutY="106.0" prefHeight="25.0" prefWidth="76.0" />
+      <TextField fx:id="txtTimeStart" layoutX="34.0" layoutY="106.0" prefHeight="25.0" prefWidth="76.0" />
+      <Text layoutX="34.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time span:" />
+      <TextField fx:id="txtTimeEnd" layoutX="129.0" layoutY="106.0" prefHeight="25.0" prefWidth="76.0" />
       <Text layoutX="113.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to" />
-      <Button layoutX="89.0" layoutY="153.0" mnemonicParsing="false" text="BLOCK" />
+      <Button fx:id="btnBlock" layoutX="89.0" layoutY="153.0" mnemonicParsing="false" text="BLOCK" />
    </children>
 </AnchorPane>
