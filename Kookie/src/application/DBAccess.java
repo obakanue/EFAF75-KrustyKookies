@@ -39,7 +39,17 @@ public class DBAccess {
 	public boolean isConnected() {
 		return conn != null;
 	}
-
 	
+	/*
+	 * Blocks a recipe from startDate to endDate.
+	 * @return true, if the recipe was successfully blocked, false if not.
+	 */
+	
+	public boolean blockRecipe(String recipe, String startDate, String endDate){
+		
+		
+		
+		return false;
+	}
 	
 }
