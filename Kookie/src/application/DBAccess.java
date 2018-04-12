@@ -48,22 +48,30 @@ public class DBAccess {
 	 */
 
 	public boolean blockRecipe(String recipe, String startDate, String endDate) {
-
-		return false;
+		String query = "INSERT INTO blocked(rec_name, start_date, end_date) VALUES (?, ?, ?);";
+		try(PreparedStatement ps = conn.prepareStatement(query)){
+			ps.setString(1, recipe);
+			ps.setString(2, startDate);
+			ps.setString(3, endDate);
+			} catch(SQLException e){
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/*
 	 * Searches for a pallet with id palletID
 	 */
-	public ArrayList<Pallet> searchPalletID(String palletID) {
-
-		try {
-			int id = Integer.parseInt(palletID);
+	public Pallet searchPalletID(String palletID) {
+		String query = "SELECT * FROM pallets WHERE palletID = ?;"
+		try(PreparedStatement ps = conn.prepareStatement(query)){
+			ps.setString(1, palletID);
+			ResultSet rs = ps.executeQuery();
 		} catch (NumberFormatException e) {
-			// insert sql stuff here
 			return null;
 		}
-		return null;
+		return new Pallet(palletID, rs.getString("status"), rs.getString("prod_date"));
 
 	}
 
@@ -76,6 +84,7 @@ public class DBAccess {
 	 * @param endDate
 	 */
 	public ArrayList<Pallet> searchRecipesBetween(String recipe, String startDate, String endDate) {
+		String query = "SELECT"
 		return null;
 
 	}
