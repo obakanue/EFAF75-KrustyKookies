@@ -3,6 +3,7 @@ package application;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DBAccess {
 
@@ -39,17 +40,56 @@ public class DBAccess {
 	public boolean isConnected() {
 		return conn != null;
 	}
-	
+
 	/*
 	 * Blocks a recipe from startDate to endDate.
+	 * 
 	 * @return true, if the recipe was successfully blocked, false if not.
 	 */
-	
-	public boolean blockRecipe(String recipe, String startDate, String endDate){
-		
-		
-		
+
+	public boolean blockRecipe(String recipe, String startDate, String endDate) {
+
 		return false;
 	}
-	
+
+	/*
+	 * Searches for a pallet with id palletID
+	 */
+	public ArrayList<Pallet> searchPalletID(String palletID) {
+
+		try {
+			int id = Integer.parseInt(palletID);
+		} catch (NumberFormatException e) {
+			// insert sql stuff here
+			return null;
+		}
+		return null;
+
+	}
+
+	/**
+	 * Search for the pallets produced of a certain recipe between the dates
+	 * startDate and endDate.
+	 * 
+	 * @param recipe
+	 * @param startDate
+	 * @param endDate
+	 */
+	public ArrayList<Pallet> searchRecipesBetween(String recipe, String startDate, String endDate) {
+		return null;
+
+	}
+
+	/**
+	 * Search for pallets produced between startDate and endDate.
+	 * 
+	 * @param text
+	 * @param text2
+	 */
+
+	public ArrayList<Pallet> searchBetween(String startDate, String endDate) {
+		return null;
+
+	}
+
 }
