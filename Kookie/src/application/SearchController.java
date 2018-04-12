@@ -45,15 +45,15 @@ public class SearchController {
 	}
 	
 	public void btnSearchOnClick(){
-		if(txtID.getText() != null){
+		if(txtID.getText().equals("")){
 			lvPallets.setItems(FXCollections.observableArrayList(db.searchPalletID(txtID.getText())));
 			return;
 		}
-		if(txtProd.getText() == null && txtTimeStart.getText() != null && txtTimeEnd.getText() != null){
+		if(txtProd.getText().equals("") && !txtTimeStart.getText().equals("")&& !txtTimeEnd.getText().equals("")){
 			lvPallets.setItems(FXCollections.observableArrayList(db.searchBetween(txtTimeStart.getText(), txtTimeEnd.getText())));
 			return;
 		}
-		if(!(txtProd.getText() == null || txtTimeStart.getText() == null || txtTimeEnd.getText() == null)){
+		if(!(txtProd.getText().equals("") || txtTimeStart.getText().equals("")|| txtTimeEnd.getText().equals(""))){
 			lvPallets.setItems(FXCollections.observableArrayList(db.searchRecipesBetween(txtProd.getText(), txtTimeStart.getText(), txtTimeEnd.getText())));
 			return;
 		}

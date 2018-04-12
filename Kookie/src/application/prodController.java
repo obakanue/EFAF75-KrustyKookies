@@ -17,11 +17,11 @@ public class prodController {
 	private Button btnProduce = new Button();
 	
 	@FXML
-	private TextArea listView = new TextArea();
+	private TextArea textArea = new TextArea();
 	
 	public void btnProduceOnClick(){
-		if(txtRecipe.getText() != null && txtAmount.getText() != null){
-			
+		if(!txtRecipe.getText().equals("")&& !txtAmount.getText().equals("")){
+			textArea.setText(db.producePallets(txtRecipe.getText(), txtAmount.getText()));
 		}
 		
 	}

@@ -92,4 +92,21 @@ public class DBAccess {
 
 	}
 
+	/**
+	 * 
+	 * @param recipe
+	 * @param amount
+	 * @return String in the format "X pallets of /recipe/ has been produced. 
+	 * 			or "amount is not an integer"
+	 * 			or "insufficient materials for the X pallets to be produced"
+	 */
+	public String producePallets(String recipe, String amount) {
+		try {
+			int amnt = Integer.parseInt(amount);
+		} catch (NumberFormatException e) {
+			return "amount is not an integer";
+		}
+		return amount + " pallets of " + recipe + "has been produced";
+	}
+
 }
