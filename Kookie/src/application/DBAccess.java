@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class DBAccess {
 
@@ -60,19 +61,20 @@ public class DBAccess {
 		return true;
 	}
 
-	/*
-	 * Searches for a pallet with id palletID
+	/**
+	 * Searches for a pallet with id palletID.
+	 *
+	 * @param palletID
 	 */
 	public Pallet searchPalletID(String palletID) {
 		String query = "SELECT * FROM pallets WHERE palletID = ?;"
 		try(PreparedStatement ps = conn.prepareStatement(query)){
 			ps.setString(1, palletID);
 			ResultSet rs = ps.executeQuery();
-		} catch (NumberFormatException e) {
+		} catch (SQLException e) {
 			return null;
 		}
 		return new Pallet(palletID, rs.getString("status"), rs.getString("prod_date"));
-
 	}
 
 	/**
@@ -84,21 +86,63 @@ public class DBAccess {
 	 * @param endDate
 	 */
 	public ArrayList<Pallet> searchRecipesBetween(String recipe, String startDate, String endDate) {
-		String query = "SELECT"
-		return null;
-
+		String query = "SELECT * FROM pallets WHERE recipe = ? AND prod_date BETWEEN ? AND ?;";
+		ArrayList<Pallet> pallets = new ArrayList<Pallet>();
+		try(PreparedStatement ps = conn.prepareStatement(query)){
+			ps.setString(1, recipe);
+			ps.setString(2, startDate);
+			ps.setString(3, endDate);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				pallets.add(new Pallet(rs.getString("pallet_id"), rs.getString("status"), rs.getString("prod_date")));
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return pallets;
 	}
 
 	/**
 	 * Search for pallets produced between startDate and endDate.
 	 * 
-	 * @param text
-	 * @param text2
+	 * @param startDate
+	 * @param endDate
 	 */
-
 	public ArrayList<Pallet> searchBetween(String startDate, String endDate) {
-		return null;
-
+		String query = "SELECT * FROM pallets WHERE prod_date BETWEEN ? AND ?;";
+		ArrayList<Pallet> pallets = new ArrayList<Pallet>();
+		try(PreparedStatement ps = conn.prepareStatement(query)){
+			ps.setString(1, startDate);
+			ps.setString(2, endDateDate);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				pallets.add(new Pallet(rs.getString("pallet_id"), rs.getString("status"), rs.getString("prod_date")));
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return pallets;
 	}
-
+	
+	/**
+	 * Adds a newly produced pallet in pallets table.
+	 * 
+	 * @param rec_name
+	 * @param order_id
+	 * @return true if succesfully added else false.
+	 */
+	public boolean producePallet(String rec_name, String order_id){
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate localDate = LocalDate.now();
+		String query = "INSERT INTO pallets(pallet_id, status, prod_date, rec_name, order_id) VALUES('', '', ?, ?, ?);";
+		try(PreparedStatement ps = conn.prepareStatement(query)){
+			ps.setString(1, localDate);
+			ps.setString(2, rec_name);
+			ps.setString(3, order_id);
+			ps.executeUpdate();
+		} catch (SQLException e){
+			return false;
+		}
+		return true;
+	}
 }

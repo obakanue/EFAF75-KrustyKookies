@@ -5,9 +5,43 @@ public class Pallet {
 	private int status;
 	private String prodDate;
 
+	/**
+	 * Creates a pallet with pallet_id, status and prod_date
+	 * 
+	 * @param id, unique pallet_id with max 8 integers
+	 * @param status, 0 = produced, 1 = freezer, 2 = blocked, 3 = delivered
+	 * @param prodDate, date of production
+	 */
 	public Pallet(int id, int status,  String prodDate){
 		this.id = id;
 		this.status = status;
 		this.prodDate = prodDate;
+	}
+	
+	/**
+	 * Returns pallet_id of pallet.
+	 *
+	 * @return id
+	 */
+	public int getId(){
+		return id;
+	}
+	
+	/**
+	 * Returns status of pallet.
+	 *
+	 * @return status
+	 */
+	public int getStatus(){
+		return status;
+	}
+	
+	/**
+	 * Returns prod_date of pallet.
+	 *
+	 * @return prodDate
+	 */
+	public String getProdDate(){
+		return prodDate;
 	}
 }
