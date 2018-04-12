@@ -44,7 +44,7 @@ CREATE TABLE orders(
 DROP TABLE IF EXISTS pallets;
 CREATE TABLE pallets(
 	pallet_id	TEXT,
-	status		INTEGER,
+	status		INTEGER CHECK(status <= 4 AND status >= 0),
 	prod_date	DATE,
 	rec_name	TEXT,
 	order_id	TEXT,

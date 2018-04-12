@@ -84,50 +84,55 @@ INSERT INTO orders(
 order_id, delivered_by, c_name)
 VALUES
 (
-NULL, '2018-04-14', 'IKEA Göteborg'),
-(NULL, '2018-04-15', 'IKEA Malmö'),
-(NULL, '2018-04-20', 'COOP Lund'),
-(NULL, '2018-04-15', 'ICA Kvantum Angered'),
-(NULL, '2018-04-15', 'ICA MAXI Hisingen'),
-(NULL, '2018-04-18', 'ICA Kvantum Tuna Lund'),
-(NULL, '2018-04-19', 'ICA MAXI Hisingen'),
-(NULL, '2018-04-22', 'IKEA Malmö');
+'735446', '2018-04-16', 'IKEA Göteborg'),
+('735555', '2018-04-15', 'IKEA Malmö'),
+('734234', '2018-04-20', 'COOP Lund'),
+('731204', '2018-04-15', 'ICA Kvantum Angered'),
+('735023', '2018-04-15', 'ICA MAXI Hisingen'),
+('735032', '2018-04-18', 'ICA Kvantum Tuna Lund'),
+('738989', '2018-04-19', 'ICA MAXI Hisingen'),
+('733333', '2018-04-22', 'IKEA Malmö');
 
 INSERT INTO pallets(
 pallet_id, status, prod_date, rec_name, order_id)
 VALUES
 (
-NULL,0, '2018-04-14', 'Berliner', NULL),
-(NULL,0, '2018-04-14', 'Tango', NULL),
-(NULL,0, '2018-04-14', 'Tango', NULL),
-(NULL,1, '2018-04-14', 'Almond delight', NULL),
-(NULL,2, '2018-04-14', 'Nut ring', NULL),
-(NULL,3, '2018-04-14', 'Nut cookie', NULL),
-(NULL,4, '2018-04-14', 'Amneris', NULL);
+'z99221',0, '2018-04-14', 'Berliner', '735446'),
+('9450s0',0, '2018-04-14', 'Tango','735555'),
+('sd40w0',0, '2018-04-14', 'Tango', '734234'),
+('f09f09',1, '2018-04-14', 'Almond delight', '731204'),
+('3j2323',2, '2018-04-14', 'Nut ring', '735023'),
+('535k34',3, '2018-04-14', 'Nut cookie', '735032'),
+('509f0f',3, '2018-04-14', 'Nut cookie', '735032'),
+('e301u9',4, '2018-04-14', 'Amneris', '738989'),
+('e30k02',4, '2018-04-14', 'Amneris', '733333'),
+('9fqd0d',4, '2018-04-14', 'Nut cookie', '733333');
 
 INSERT INTO deliveries(
 delivery_id, delivery_date)
 VALUES
 (
-NULL, '2018-04-20'),
-(NULL, '2018-04-14'),
-(NULL, '2018-04-17'),
-(NULL, '2018-04-15'),
-(NULL, '2018-04-18'),
-(NULL, '2018-04-19'),
-(NULL, '2018-04-22');
+'sdlwld', '2018-04-20'),
+('dwowpw', '2018-04-14'),
+('oqlfoq', '2018-04-17'),
+('oopsya', '2018-04-15'),
+('qimdmc', '2018-04-18'),
+('qrtdla', '2018-04-19'),
+('cxwxpf', '2018-04-22'),
+('cfksal', '2018-04-15');
 
 INSERT INTO delivery_info(
 delivery_id, order_id, amount_delivered)
 VALUES
 (
-NULL, NULL, 1),
-(NULL, NULL, 1),
-(NULL, NULL, 1),
-(NULL, NULL, 1),
-(NULL, NULL, 1),
-(NULL, NULL, 1),
-(NULL, NULL, 1);
+'oqlfoq', '735446', 1),
+('dwowpw', '735555', 1),
+('sdlwld', '734234', 1),
+('oopsya', '731204', 1),
+('cfksal', '735023', 1),
+('qimdmc', '735032', 2),
+('qrtdla', '738989', 1),
+('cxwxpf', '733333', 2);
 
 INSERT INTO blocked(
 rec_name, start_date, end_date)
@@ -139,10 +144,12 @@ INSERT INTO order_info(
 rec_name, order_id, no_pallets)
 VALUES
 (
-'Berliner', NULL, 1),
-('Tango', NULL, 1),
-('Tango', NULL, 1),
-('Almond delight', NULL, 1),
-('Nut ring', NULL, 1),
-('Nut cookie', NULL, 1),
-('Amneris', NULL, 1);
+'Berliner', '735446', 1),
+('Tango', '735555', 1),
+('Tango', '734234', 1),
+('Almond delight', '731204', 1),
+('Nut ring', '735023', 1),
+('Nut cookie', '735032', 2),
+('Nut cookie', '733333', 1),
+('Amneris', '738989', 1),
+('Amneris', '733333', 1);
