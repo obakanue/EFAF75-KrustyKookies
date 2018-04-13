@@ -35,7 +35,7 @@ CREATE TABLE customers(
 	
 DROP TABLE IF EXISTS orders;
 CREATE TABLE orders(
-	order_id	TEXT,
+	order_id		INTEGER,
 	delivered_by	DATE,
 	c_name	TEXT,
 	PRIMARY KEY (order_id),
@@ -43,11 +43,11 @@ CREATE TABLE orders(
 	);
 DROP TABLE IF EXISTS pallets;
 CREATE TABLE pallets(
-	pallet_id	TEXT,
-	status		INTEGER CHECK(status <= 4 AND status >= 0),
+	pallet_id	INTEGER,
+	status		INTEGER DEFAULT 0 CHECK(status <= 3 AND status >= 0),
 	prod_date	DATE,
 	rec_name	TEXT,
-	order_id	TEXT,
+	order_id	INTEGER,
 	PRIMARY KEY (pallet_id),
 	FOREIGN KEY (rec_name) REFERENCES recipes(rec_name),
 	FOREIGN KEY	(order_id) REFERENCES orders(order_id)
@@ -55,15 +55,15 @@ CREATE TABLE pallets(
 	
 DROP TABLE IF EXISTS deliveries;
 CREATE TABLE deliveries(
-	delivery_id	TEXT,
+	delivery_id	INTEGER,
 	delivery_date	DATE,
 	PRIMARY KEY (delivery_id)
 	);
 
 DROP TABLE IF EXISTS delivery_info;
 CREATE TABLE delivery_info(
-	delivery_id	TEXT,
-	order_id	TEXT,
+	delivery_id	INTEGER,
+	order_id	INTEGER,
 	amount_delivered	INTEGER,
 	PRIMARY KEY (delivery_id, order_id),
 	FOREIGN KEY (delivery_id) REFERENCES deliveries(delivery_id),
@@ -82,7 +82,7 @@ CREATE TABLE blocked(
 DROP TABLE IF EXISTS order_info;
 CREATE TABLE order_info(
 	rec_name	TEXT,
-	order_id	TEXT,
+	order_id	INTEGER,
 	no_pallets	INTEGER,
 	FOREIGN KEY (rec_name) REFERENCES recipes(rec_name),
 	FOREIGN KEY (order_id) REFERENCES orders(order_id)

@@ -1,0 +1,60 @@
+package application;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+
+public class SearchController {
+	
+	DBAccess db = new DBAccess();
+	
+	@FXML
+	private Button btnSearch = new Button();
+	
+	@FXML
+	private TextField txtID = new TextField();
+	
+	@FXML 
+	private TextField txtProd = new TextField();
+	
+	@FXML
+	private TextField txtTimeStart = new TextField();
+	
+	@FXML 
+	private TextField txtTimeEnd = new TextField();
+	
+	public void txtIDOnClick(){
+		txtProd.clear();
+		txtTimeStart.clear();
+		txtTimeEnd.clear();
+	}
+	
+	public void txtProdOnClick(){
+		txtID.clear();
+	}
+	
+	public void txtTimeStartOnClick(){
+		txtID.clear();
+	}
+	
+	public void txtTimeEndOnClick(){
+		txtID.clear();
+	}
+	
+	public void btnSearchOnClick(){
+		if(txtID.getText() != null){
+			db.searchPalletID(txtID.getText());
+			return;
+		}
+		if(txtProd.getText() == null && txtTimeStart.getText() != null && txtTimeEnd.getText() != null){
+			db.searchBetween(txtTimeStart.getText(), txtTimeEnd.getText());
+		}
+		if(!(txtProd.getText() == null || txtTimeStart.getText() == null || txtTimeEnd.getText() == null)){
+			db.searchRecipesBetween(txtProd.getText(), txtTimeStart.getText(), txtTimeEnd.getText());
+		}
+		
+		return;
+		
+
+	}
+
+}
