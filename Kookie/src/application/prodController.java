@@ -19,9 +19,12 @@ public class prodController {
 	@FXML
 	private TextArea textArea = new TextArea();
 	
+	@FXML
+	private TextField txtOrderID = new TextField();
+	
 	public void btnProduceOnClick(){
-		if(!txtRecipe.getText().equals("")&& !txtAmount.getText().equals("")){
-			textArea.setText(db.producePallets(txtRecipe.getText(), txtAmount.getText()));
+		if(!txtRecipe.getText().equals("") && !txtAmount.getText().equals("") && !txtOrderID.getText().equals("")){
+			textArea.setText(db.producePallet(txtRecipe.getText(), txtOrderID.getText(), txtAmount.getText()));
 		}
 		
 	}
