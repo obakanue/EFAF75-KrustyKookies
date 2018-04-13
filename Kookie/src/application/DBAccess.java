@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javafx.util.Callback;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -68,24 +71,30 @@ public class DBAccess {
 	 *
 	 * @param palletID
 	 */
-	public Pallet searchPalletID(String ID) {
+	public ArrayList<Pallet> searchPalletID(String ID) {
 		int palletID = 0;
-		try{
+		ArrayList<Pallet> ret = new ArrayList<Pallet>();
+		try {
 			palletID = Integer.parseInt(ID);
-		}catch(NumberFormatException e){
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
 			return null;
 		}
-		
-		String query = "SELECT * FROM pallets WHERE palletID = ?;";
+
+		String query = "SELECT * FROM pallets WHERE pallet_id = ?;";
 		try (PreparedStatement ps = conn.prepareStatement(query)) {
 			ps.setInt(1, palletID);
 			ResultSet rs = ps.executeQuery();
-			return new Pallet(palletID, rs.getInt("status"), rs.getString("prod_date"));
+			while (rs.next()) {
+				ret.add(new Pallet(palletID, rs.getInt("status"), rs.getString("prod_date"), rs.getString("rec_name")));
+				
+			}
 		} catch (SQLException e) {
-			return null;
+			e.printStackTrace();
 		}
-	
-		
+
+		return ret;
+
 	}
 
 	/**
@@ -97,7 +106,7 @@ public class DBAccess {
 	 * @param endDate
 	 */
 	public ArrayList<Pallet> searchRecipesBetween(String recipe, String startDate, String endDate) {
-		String query = "SELECT * FROM pallets WHERE recipe = ? AND prod_date BETWEEN ? AND ?;";
+		String query = "SELECT * FROM pallets WHERE rec_name = ? AND prod_date BETWEEN ? AND ?;";
 		ArrayList<Pallet> pallets = new ArrayList<Pallet>();
 		try (PreparedStatement ps = conn.prepareStatement(query)) {
 			ps.setString(1, recipe);
@@ -105,8 +114,10 @@ public class DBAccess {
 			ps.setString(3, endDate);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				pallets.add(new Pallet(rs.getInt("pallet_id"), rs.getInt("status"), rs.getString("prod_date")));
+				pallets.add(new Pallet(rs.getInt("pallet_id"), rs.getInt("status"), rs.getString("prod_date"),
+						rs.getString("rec_name")));
 			}
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -127,8 +138,10 @@ public class DBAccess {
 			ps.setString(2, endDate);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				pallets.add(new Pallet(rs.getInt("pallet_id"), rs.getInt("status"), rs.getString("prod_date")));
+				pallets.add(new Pallet(rs.getInt("pallet_id"), rs.getInt("status"), rs.getString("prod_date"),
+						rs.getString("rec_name")));
 			}
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -142,16 +155,17 @@ public class DBAccess {
 	 * @param order_id
 	 * @return true if succesfully added else false.
 	 */
-	public boolean producePallet(String rec_name, String order_id){
+	public boolean producePallet(String rec_name, String order_id) {
+		// Måste kolla att råvarorna räcker till innan pallarna lagts till.
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate localDate = LocalDate.now();
 		String query = "INSERT INTO pallets(pallet_id, status, prod_date, rec_name, order_id) VALUES('', '', ?, ?, ?);";
-		try(PreparedStatement ps = conn.prepareStatement(query)){
+		try (PreparedStatement ps = conn.prepareStatement(query)) {
 			ps.setString(1, dtf.format(localDate));
 			ps.setString(2, rec_name);
 			ps.setString(3, order_id);
 			ps.executeUpdate();
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			return false;
 		}
 		return true;
@@ -161,9 +175,9 @@ public class DBAccess {
 	 * 
 	 * @param recipe
 	 * @param amount
-	 * @return String in the format "X pallets of /recipe/ has been produced. 
-	 * 			or "amount is not an integer"
-	 * 			or "insufficient materials for the X pallets to be produced"
+	 * @return String in the format "X pallets of /recipe/ has been produced. or
+	 *         "amount is not an integer" or "insufficient materials for the X
+	 *         pallets to be produced"
 	 */
 	public String producePallets(String recipe, String amount) {
 		try {
@@ -174,5 +188,22 @@ public class DBAccess {
 		return amount + " pallets of " + recipe + "has been produced";
 	}
 
-	
+	public ArrayList<Pallet> searchRecipe(String recipe) {
+		ArrayList<Pallet> ret = new ArrayList<Pallet>();
+		String query = "SELECT * FROM pallets WHERE rec_name = ?;";
+		try (PreparedStatement ps = conn.prepareStatement(query)) {
+			ps.setString(1, recipe);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				ret.add(new Pallet(rs.getInt("pallet_id"), rs.getInt("status"), rs.getString("prod_date"),
+						rs.getString("rec_name")));
+			}
+			rs.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ret;
+	}
+
 }

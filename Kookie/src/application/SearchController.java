@@ -45,7 +45,7 @@ public class SearchController {
 	}
 	
 	public void btnSearchOnClick(){
-		if(txtID.getText().equals("")){
+		if(!txtID.getText().equals("")){
 			lvPallets.setItems(FXCollections.observableArrayList(db.searchPalletID(txtID.getText())));
 			return;
 		}
@@ -56,6 +56,8 @@ public class SearchController {
 		if(!(txtProd.getText().equals("") || txtTimeStart.getText().equals("")|| txtTimeEnd.getText().equals(""))){
 			lvPallets.setItems(FXCollections.observableArrayList(db.searchRecipesBetween(txtProd.getText(), txtTimeStart.getText(), txtTimeEnd.getText())));
 			return;
+		}else{
+			lvPallets.setItems(FXCollections.observableArrayList(db.searchRecipe(txtProd.getText())));
 		}
 		
 		return;
