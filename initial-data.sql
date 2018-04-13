@@ -91,7 +91,8 @@ VALUES
 (735023, '2018-04-15', 'ICA MAXI Hisingen'),
 (735032, '2018-04-18', 'ICA Kvantum Tuna Lund'),
 (738989, '2018-04-19', 'ICA MAXI Hisingen'),
-(733333, '2018-04-22', 'IKEA Malmö');
+(733333, '2018-04-22', 'IKEA Malmö'),
+(1,'2018-04-13', 'IKEA Malmö');
 
 INSERT INTO pallets(
 pallet_id, status, prod_date, rec_name, order_id)
@@ -152,4 +153,5 @@ VALUES
 ('Nut cookie', 735032, 2),
 ('Nut cookie', 733333, 1),
 ('Amneris', 738989, 1),
-('Amneris', 733333, 1);
+('Amneris', 733333, 1),
+('Berliner', 1, 10);
