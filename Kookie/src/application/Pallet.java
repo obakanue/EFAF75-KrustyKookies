@@ -7,11 +7,12 @@ public class Pallet {
 	private String recName;
 
 	/**
-	 * Creates a pallet with pallet_id, status and prod_date
+	 * Creates a pallet with pallet_id, status, prod_date and recName
 	 * 
 	 * @param id, unique pallet_id with max 8 integers
 	 * @param status, 0 = produced, 1 = freezer, 2 = blocked, 3 = delivered
 	 * @param prodDate, date of production
+	 * @param recName, name of recipe
 	 */
 	public Pallet(int id, int status,  String prodDate, String recName){
 		this.id = id;
@@ -47,10 +48,20 @@ public class Pallet {
 		return prodDate;
 	}
 	
+	/**
+	 * Returns rec_name of pallet.
+	 *
+	 * @return recName
+	 */
 	public String getRecName(){
 		return recName;
 	}
 	
+	/**
+	 * Returns a string of attributes of a pallet.
+	 *
+	 * @return String pallet info
+	 */
 	public String toString(){
 		String stat = null;
 		switch (status){

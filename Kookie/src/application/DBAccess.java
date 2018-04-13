@@ -163,45 +163,92 @@ public class DBAccess {
 	}
 
 	/**
-	 * Adds a newly produced pallet in pallets table.
+	 * Adds a newly produced pallet in pallets table after updating warehouse.
 	 * 
-	 * @param rec_name
+	 * @param recipe
 	 * @param order_id
-	 * @return true if succesfully added else false.
+	 * @param amount
+	 * @return true if successfully added else false.
 	 */
-	public boolean producePallet(String rec_name, String order_id) {
-		// Måste kolla att råvarorna räcker till innan pallarna lagts till.
+	public boolean producePallet(String recipe, String order_id, String amount) {
+		int am = 0;
+		try{
+			am = Integer.parseInt(amount);
+		} catch(NumberFormatException e){
+			e.printStackTrace();
+		}
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate localDate = LocalDate.now();
-		String query = "INSERT INTO pallets(pallet_id, status, prod_date, rec_name, order_id) VALUES('', '', ?, ?, ?);";
-		try (PreparedStatement ps = conn.prepareStatement(query)) {
-			ps.setString(1, dtf.format(localDate));
-			ps.setString(2, rec_name);
-			ps.setString(3, order_id);
-			ps.executeUpdate();
-		} catch (SQLException e) {
+		if(updateWarehouse(recipe, am)){
+			String query = "INSERT INTO pallets(pallet_id, status, prod_date, rec_name, order_id) VALUES('', '', ?, ?, ?);";
+			try (PreparedStatement ps = conn.prepareStatement(query)) {
+				ps.setString(1, dtf.format(localDate));
+				ps.setString(2, recipe);
+				ps.setString(3, order_id);
+				ps.executeUpdate();
+			} catch (SQLException e) {
+				return false;
+			}
+		return true;
+		}
+	return false;
+	}
+	
+	/**
+	 * Checks if there are sufficient with ingredients to fullfill order, returns true or false depending on availability.
+	 * 
+	 * @param recipe
+	 * @param amount
+	 * @return true if there are sufficient with ingredients otherwise false
+	 */
+	public boolean checkWarehouse(String recipe, String amount){
+		int am = 0;
+		try{
+			am = Integer.parseInt(amount);
+		} catch(NumberFormatException e){
+			e.printStackTrace();
+		}
+		int rowsRec = 0;
+		int rowsAvail = 0;
+		String query = "SELECT count() as rowsRec FROM rec_ing WHERE recipe = ?;";
+		try (PreparedStatement ps = conn.prepareStatement(query)){
+			ps.setString(1, recipe);
+			ResultSet rs = ps.executeQuery();
+			rowsRec = rs.getInt("rowsRec");
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		String query2 = "SELECT count() as rowsAvail FROM recipe JOIN rec_ing USING (rec_name) JOIN ingredient USING (ing_name) WHERE rec_name = ? AND rec_ing.amount * 36 * ? >= ingredient.amount;";
+		try (PreparedStatement ps = conn.prepareStatment(query2)){
+			ps.setString(1, recipe);
+			ps.setString(2, am);
+			rowsAvail = rs.getInt("rowsAvail");
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		if(rowsAvail < rowsRec){
 			return false;
 		}
 		return true;
 	}
-
+	
 	/**
+	 * Private method that updates warehouse storage of ingredients. 
 	 * 
 	 * @param recipe
 	 * @param amount
-	 * @return String in the format "X pallets of /recipe/ has been produced. or
-	 *         "amount is not an integer" or "insufficient materials for the X
-	 *         pallets to be produced"
+	 * @return boolean true if successfully updated false if not
 	 */
-	public String producePallets(String recipe, String amount) {
-		try {
-			int amnt = Integer.parseInt(amount);
-		} catch (NumberFormatException e) {
-			return "amount is not an integer";
-		}
-		return amount + " pallets of " + recipe + "has been produced";
+	private boolean updateWarehouse(String recipe, int amount){
+		
 	}
 
+	/**
+	 * Returns an array of pallets for a specific recipe in database
+	 * 
+	 * @param recipe
+	 * @return ArrayList<Pallet>, pallets of a specific recipe
+	 */
 	public ArrayList<Pallet> searchRecipe(String recipe) {
 		ArrayList<Pallet> ret = new ArrayList<Pallet>();
 		String query = "SELECT * FROM pallets WHERE rec_name = ?;";
