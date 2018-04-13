@@ -55,15 +55,16 @@ public class Pallet {
 		String stat = null;
 		switch (status){
 			case 0: 
-				stat = "produced";
+				stat = "Produced";
 				break;
 			case 1:
-				stat = "freezer";
+				stat = "Freezer";
 				break;
 			case 2:
-				stat = "blocked";
+				stat = "Blocked";
+				break;
 			default:
-				stat = "delivered";
+				stat = "Delivered";
 				break;
 		}
 			return id + " | " + stat + " | " + prodDate + " | " + recName; 

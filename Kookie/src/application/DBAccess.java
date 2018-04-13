@@ -60,10 +60,24 @@ public class DBAccess {
 			ps.setString(1, recipe);
 			ps.setString(2, startDate);
 			ps.setString(3, endDate);
+			ps.executeUpdate();
+			blockPallets(recipe,startDate,endDate);
 		} catch (SQLException e) {
 			return false;
 		}
 		return true;
+	}
+	
+	private void blockPallets(String recipe, String startDate, String endDate){
+		String query = "UPDATE pallets SET status = 2 WHERE rec_name = ? AND prod_date BETWEEN ? AND ?;";
+		try(PreparedStatement ps = conn.prepareStatement(query)){
+			ps.setString(1, recipe);
+			ps.setString(2, startDate);
+			ps.setString(3, endDate);
+			ps.executeUpdate();
+		}catch(SQLException e){
+			
+		}
 	}
 
 	/**

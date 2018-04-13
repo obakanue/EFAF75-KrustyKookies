@@ -32,7 +32,7 @@ public class BlockController {
 	 */
 
 	public void btnBlockOnClick() {
-		if (!(txtRecipe.getText().equals("") || txtStartDate.getText().equals("") || txtEndDate.getText().equals(""))) {
+		if (!txtRecipe.getText().equals("") && !txtStartDate.getText().equals("") && !txtEndDate.getText().equals("")) {
 			if (db.blockRecipe(txtRecipe.getText(), txtStartDate.getText(), txtEndDate.getText())) {
 				lblMessage.setText(txtRecipe.getText() + " has been blocked from " + txtStartDate.getText() + " to "
 						+ txtEndDate.getText());
