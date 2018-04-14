@@ -22,16 +22,21 @@ public class prodController {
 	@FXML
 	private TextField txtOrderID = new TextField();
 
-	public void btnProduceOnClick(){
-		if(!txtRecipe.getText().equals("") && !txtAmount.getText().equals("") && !txtOrderID.getText().equals("")){
-			boolean b = db.producePallet(txtRecipe.getText(), txtOrderID.getText(), txtAmount.getText());
-			if(b){
-				textArea.setText("Pallets produced");
-			}else{
-				textArea.setText("Pallets couldn't be produced");
+	public void btnProduceOnClick() {
+		if (!txtRecipe.getText().equals("") && !txtAmount.getText().equals("") && !txtOrderID.getText().equals("")) {
+			if (!db.checkIfBlocked(txtRecipe.getText())) {
+				if (db.producePallet(txtRecipe.getText(), txtOrderID.getText(), txtAmount.getText())) {
+					textArea.setText("Pallets produced");
+					return;
+				} else {
+					textArea.setText("Pallets couldn't be produced");
+					return;
+				}
 			}
+			
+			textArea.setText("Recipe is currently blocked");
 		}
-		
+
 	}
 
 }

@@ -19,7 +19,7 @@ public class DBAccess {
 
 	public DBAccess() {
 		openConnection("krusty-db.sqlite");
-		
+
 	}
 
 	public boolean openConnection(String filename) {
@@ -294,6 +294,34 @@ public class DBAccess {
 			e.printStackTrace();
 		}
 		return ret;
+	}
+
+	/**
+	 * Checks if a recipe is currently blocked.
+	 * 
+	 * @param recipe
+	 * @return true if recipe is blocked, false if it is not blocked.
+	 */
+	public boolean checkIfBlocked(String recipe) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String query = "SELECT count() AS cnt FROM blocked WHERE rec_name = ? AND ? BETWEEN start_date AND end_date;";
+		try (PreparedStatement ps = conn.prepareStatement(query)) {
+			ps.setString(1, recipe);
+			ps.setString(2, sdf.format(System.currentTimeMillis()).toString());
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				int i = rs.getInt("cnt");
+				System.out.println(i);
+				if ( i == 0) {
+					return false;
+				}
+			}
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+
 	}
 
 }
