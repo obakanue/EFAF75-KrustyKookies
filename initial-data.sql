@@ -1,3 +1,4 @@
+PRAGMA foreign_keys = ON;
 INSERT INTO recipes(
 rec_name)
 VALUES 
@@ -13,25 +14,25 @@ INSERT INTO ingredients(
 ing_name, unit, amount, date_of_deliv, size_of_deliv)
 VALUES 
 (
-'Flour', 'gram', 1000, '2018-04-10', 1000),
-('Butter', 'gram', 1000, '2018-04-10', 1000),
-('Icing sugar', 'gram', 1000, '2018-04-10', 1000),
-('Roasted, chopped nuts', 'gram', 1000, '2018-04-10', 1000),
-('Fine-ground nuts', 'gram', 1000, '2018-04-10', 1000),
-('Ground, roasted nuts', 'gram', 1000, '2018-04-10', 1000),
-('Bread crumbs', 'gram', 1000, '2018-04-10', 1000),
-('Sugar', 'gram', 1000, '2018-04-10', 1000),
-('Egg whites', 'deciliter', 1000, '2018-04-10', 1000),
-('Chocolate', 'gram', 1000, '2018-04-10', 1000),
-('Marzipan', 'gram', 1000, '2018-04-10', 1000),
-('Eggs', 'pieces', 1000, '2018-04-10', 1000),
-('Potato starch', 'gram', 1000, '2018-04-10', 1000),
-('Wheat flour', 'gram', 1000, '2018-04-10', 1000),
-('Sodium bicarbonate', 'gram', 1000, '2018-04-10', 1000),
-('Vanilla', 'gram', 1000, '2018-04-10', 1000),
-('Chopped almonds', 'gram', 1000, '2018-04-10', 1000),
-('Cinnamon', 'gram', 1000, '2018-04-10', 1000),
-('Vanilla sugar', 'gram', 1000, '2018-04-10', 1000);
+'Flour', 'gram', 100000, '2018-04-10', 100000),
+('Butter', 'gram', 100000, '2018-04-10', 100000),
+('Icing sugar', 'gram', 100000, '2018-04-10', 100000),
+('Roasted, chopped nuts', 'gram', 100000, '2018-04-10', 100000),
+('Fine-ground nuts', 'gram', 100000, '2018-04-10', 100000),
+('Ground, roasted nuts', 'gram', 100000, '2018-04-10', 100000),
+('Bread crumbs', 'gram', 100000, '2018-04-10', 100000),
+('Sugar', 'gram', 100000, '2018-04-10', 100000),
+('Egg whites', 'deciliter', 100000, '2018-04-10', 100000),
+('Chocolate', 'gram', 100000, '2018-04-10', 100000),
+('Marzipan', 'gram', 100000, '2018-04-10', 100000),
+('Eggs', 'pieces', 100000, '2018-04-10', 100000),
+('Potato starch', 'gram', 100000, '2018-04-10', 100000),
+('Wheat flour', 'gram', 100000, '2018-04-10', 100000),
+('Sodium bicarbonate', 'gram', 100000, '2018-04-10', 100000),
+('Vanilla', 'gram', 100000, '2018-04-10', 100000),
+('Chopped almonds', 'gram', 100000, '2018-04-10', 100000),
+('Cinnamon', 'gram', 100000, '2018-04-10', 100000),
+('Vanilla sugar', 'gram', 100000, '2018-04-10', 100000);
 
 INSERT INTO rec_ing(
 rec_name, ing_name, amount)
@@ -57,11 +58,11 @@ VALUES
 ('Tango', 'Flour', 300),
 ('Tango', 'Sodium bicarbonate', 4),
 ('Tango', 'Vanilla', 2),
-('Almont delight', 'Butter', 400),
-('Almont delight', 'Sugar', 270),
-('Almont delight', 'Chopped almonds', 279),
-('Almont delight', 'Flour', 400),
-('Almont delight', 'Cinnamon', 10),
+('Almond delight', 'Butter', 400),
+('Almond delight', 'Sugar', 270),
+('Almond delight', 'Chopped almonds', 279),
+('Almond delight', 'Flour', 400),
+('Almond delight', 'Cinnamon', 10),
 ('Berliner', 'Flour', 350),
 ('Berliner', 'Butter', 250),
 ('Berliner', 'Icing sugar', 100),

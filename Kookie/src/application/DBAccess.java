@@ -19,12 +19,14 @@ public class DBAccess {
 
 	public DBAccess() {
 		openConnection("krusty-db.sqlite");
+		
 	}
 
 	public boolean openConnection(String filename) {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			conn = DriverManager.getConnection("jdbc:sqlite:" + filename);
+			conn.prepareStatement("PRAGMA foreign_keys = ON;").execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -181,7 +183,7 @@ public class DBAccess {
 			e.printStackTrace();
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		if (updateWarehouse(recipe, am)) {
+		if (checkWarehouse(recipe, amount)) {
 			String query = "INSERT INTO pallets(pallet_id, status, prod_date, rec_name, order_id) VALUES(NULL, 0, ?, ?, ?);";
 			try (PreparedStatement ps = conn.prepareStatement(query)) {
 				for (int i = 0; i < am; i++) {
@@ -217,7 +219,7 @@ public class DBAccess {
 		}
 		int rowsRec = 0;
 		int rowsAvail = 0;
-		String query = "SELECT count() as rowsRec FROM rec_ing WHERE recipe = ?;";
+		String query = "SELECT count() as rowsRec FROM rec_ing WHERE rec_name = ?;";
 		try (PreparedStatement ps = conn.prepareStatement(query)) {
 			ps.setString(1, recipe);
 			ResultSet rs = ps.executeQuery();
@@ -225,7 +227,7 @@ public class DBAccess {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		String query2 = "SELECT count() as rowsAvail FROM recipe JOIN rec_ing USING (rec_name) JOIN ingredient USING (ing_name) WHERE rec_name = ? AND rec_ing.amount * 36 * ? >= ingredient.amount;";
+		String query2 = "SELECT count() as rowsAvail FROM rec_ing JOIN ingredients USING (ing_name) WHERE rec_name = ? AND rec_ing.amount * 36 * ? <= ingredients.amount;";
 		try (PreparedStatement ps2 = conn.prepareStatement(query2)) {
 			ps2.setString(1, recipe);
 			ps2.setInt(2, am);

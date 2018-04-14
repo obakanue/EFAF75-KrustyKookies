@@ -1,3 +1,4 @@
+PRAGMA foreign_keys = ON;
 DROP TABLE IF EXISTS recipes;
 CREATE TABLE recipes(
 	rec_name	TEXT,
@@ -87,7 +88,7 @@ CREATE TABLE order_info(
 	FOREIGN KEY (rec_name) REFERENCES recipes(rec_name),
 	FOREIGN KEY (order_id) REFERENCES orders(order_id)
 	);
-
+PRAGMA foreign_keys = ON;
 
 
 
