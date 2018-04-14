@@ -85,6 +85,7 @@ CREATE TABLE order_info(
 	rec_name	TEXT,
 	order_id	INTEGER,
 	no_pallets	INTEGER,
+	PRIMARY KEY(rec_name, order_id),
 	FOREIGN KEY (rec_name) REFERENCES recipes(rec_name),
 	FOREIGN KEY (order_id) REFERENCES orders(order_id)
 	);
