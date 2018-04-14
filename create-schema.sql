@@ -1,3 +1,4 @@
+PRAGMA foreign_keys = ON;
 DROP TABLE IF EXISTS recipes;
 CREATE TABLE recipes(
 	rec_name	TEXT,

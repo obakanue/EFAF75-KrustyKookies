@@ -13,7 +13,9 @@ We solved this project on our own, except for:
 
 ## ER-design
 
-The model is in the file [`Krusty Kookie AB UML.png`](Krusty_Kookie_AB UML.png):
+The model is in the file [`Krusty Kookie AB UMLv2.png`](Krusty_Kookie_AB UMLv2.png):
+
+![alt text](img/markdown_Krusty Kookie AB UMLv2.png)
 
 <center>
     <img src="Krusty Kookie AB UMLv2.png" width="100%">
