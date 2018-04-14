@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import prodController.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="299.0" prefWidth="442.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.prodController">
+   <children>
+      <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PRODUCE PALLETS" />
+      <TextField fx:id="txtRecipe" layoutX="14.0" layoutY="73.0" />
+      <Text layoutX="14.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipe:" />
+      <TextArea fx:id="textArea" layoutX="211.0" layoutY="50.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextField fx:id="txtAmount" layoutX="17.0" layoutY="177.0" prefHeight="25.0" prefWidth="45.0" />
+      <Text layoutX="17.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount:" />
+      <Button fx:id="btnProduce" layoutX="17.0" layoutY="213.0" mnemonicParsing="false" onAction="#btnProduceOnClick" text="PRODUCE" />
+      <TextField fx:id="txtOrderID" layoutX="13.0" layoutY="126.0" />
+      <Label layoutX="15.0" layoutY="109.0" text="Order ID:" />
+   </children>
+</AnchorPane>
