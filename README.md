@@ -16,7 +16,7 @@ We solved this project on our own, except for:
 The model is in the file [`Krusty Kookie AB UMLv2.png`](https://gitlab.com/Taff3r/ETAF75-KrustyKookies/raw/master/Krusty%20Kookie%20AB%20UMLv2.png):
 
 <center>
-    <img src="Krusty Kookie AB UMLv2.png" width="100%">
+    <img src="https://gitlab.com/Taff3r/ETAF75-KrustyKookies/raw/master/Krusty%20Kookie%20AB%20UMLv2.png" width="100%">
 </center>
 
 (The image above describes the model from lecture 4, you
