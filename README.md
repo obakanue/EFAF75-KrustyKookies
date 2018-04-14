@@ -8,7 +8,7 @@ This is the report for
 We solved this project on our own, except for:
 
  + The Peer-review meeting
- + ... describe any other help you've gotten ...
+ + Stackoverflow
 
 
 ## ER-design
@@ -18,11 +18,6 @@ The model is in the file [`Krusty Kookie AB UMLv2.png`](https://gitlab.com/Taff3
 <center>
     <img src="https://gitlab.com/Taff3r/ETAF75-KrustyKookies/raw/master/Krusty%20Kookie%20AB%20UMLv2.png" width="100%">
 </center>
-
-(The image above describes the model from lecture 4, you
-must replace the file '`er-model.png`' with an image of your
-own ER-model).
-
 
 ## Relations
 
@@ -35,16 +30,16 @@ so we use bold face for primary keys, italicized face for
 foreign keys, and bold italicized face for attributes which
 are both primary keys and foreign keys):
 
-+ authors(**author_name**, nationality)
-+ books(**isbn**, book_title, published_year, publisher)
-+ authored_books(**_author_name_**, **_isbn_**)
-+ copies(**copy_barcode**, _isbn_, _library_name_, shelf)
-+ ...
-
-(this should be replaced with your own relations, of course,
-but use the same way of marking primary keys and foreign
-keys).
-
++ recipes(**rec_name**)
++ ingredients(**ing_name**, unit, amount, date_of_deliv, size_of_deliv)
++ rec_ing(***rec_name***, ***ing_name***, amount)
++ customers(**c_name**, address, phn_nbr)
++ orders(**order_id**, delivered_by, *c_name*)
++ pallets(**pallet_id**, status, prod_date, *rec_name*, *order_id*)
++ deliveries(**delivery_id**, delivery_date)
++ delivery_info(***delivery_id***, ***order_id***, amount_delivered)
++ blocked(***rec_name***, start_date, end_date)
++ order_info(***rec_ name***, ***order_id***, no_pallets)
 
 ## Scripts to set up database
 
@@ -59,8 +54,6 @@ So, to create and initialize the database, we run:
 sqlite3 krusty-db.sqlite < create-schema.sql
 sqlite3 krusty-db.sqlite < initial-data.sql
 ```
-
-(or whatever you call your database file).
 
 ## How to compile and run the program
 
