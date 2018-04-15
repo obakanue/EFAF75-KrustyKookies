@@ -5,6 +5,7 @@ public class Pallet {
 	private int status;
 	private String prodDate;
 	private String recName;
+	private String recipient;
 
 	/**
 	 * Creates a pallet with pallet_id, status, prod_date and recName
@@ -14,11 +15,12 @@ public class Pallet {
 	 * @param prodDate, date of production
 	 * @param recName, name of recipe
 	 */
-	public Pallet(int id, int status,  String prodDate, String recName){
+	public Pallet(int id, int status,  String prodDate, String recName, String recipient){
 		this.id = id;
 		this.status = status;
 		this.prodDate = prodDate;
 		this.recName = recName;
+		this.recipient = recipient;
 	}
 	
 	/**
@@ -78,6 +80,6 @@ public class Pallet {
 				stat = "Delivered";
 				break;
 		}
-			return id + " | " + stat + " | " + prodDate + " | " + recName; 
+			return id + " | " + stat + " | " + prodDate + " | " + recName + " | " + recipient; 
 	}
 }

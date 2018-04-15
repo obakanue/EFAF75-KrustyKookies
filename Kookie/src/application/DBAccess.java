@@ -98,12 +98,13 @@ public class DBAccess {
 			return null;
 		}
 
-		String query = "SELECT * FROM pallets WHERE pallet_id = ?;";
+		String query = "SELECT * FROM pallets JOIN orders USING (order_id) JOIN customers USING (c_name) WHERE pallet_id = ?;";
 		try (PreparedStatement ps = conn.prepareStatement(query)) {
 			ps.setInt(1, palletID);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				ret.add(new Pallet(palletID, rs.getInt("status"), rs.getString("prod_date"), rs.getString("rec_name")));
+				ret.add(new Pallet(palletID, rs.getInt("status"), rs.getString("prod_date"), rs.getString("rec_name"),
+						rs.getString("c_name")));
 
 			}
 		} catch (SQLException e) {
@@ -123,7 +124,7 @@ public class DBAccess {
 	 * @param endDate
 	 */
 	public ArrayList<Pallet> searchRecipesBetween(String recipe, String startDate, String endDate) {
-		String query = "SELECT * FROM pallets WHERE rec_name = ? AND prod_date BETWEEN ? AND ?;";
+		String query = "SELECT pallet_ID, status, prod_date, rec_name, c_name FROM pallets JOIN orders USING (order_id) JOIN customers USING (c_name) WHERE rec_name = ? AND prod_date BETWEEN ? AND ?;";
 		ArrayList<Pallet> pallets = new ArrayList<Pallet>();
 		try (PreparedStatement ps = conn.prepareStatement(query)) {
 			ps.setString(1, recipe);
@@ -132,7 +133,7 @@ public class DBAccess {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				pallets.add(new Pallet(rs.getInt("pallet_id"), rs.getInt("status"), rs.getString("prod_date"),
-						rs.getString("rec_name")));
+						rs.getString("rec_name"), rs.getString("c_name")));
 			}
 			rs.close();
 		} catch (SQLException e) {
@@ -148,7 +149,7 @@ public class DBAccess {
 	 * @param endDate
 	 */
 	public ArrayList<Pallet> searchBetween(String startDate, String endDate) {
-		String query = "SELECT * FROM pallets WHERE prod_date BETWEEN ? AND ?;";
+		String query = "SELECT pallet_ID, status, prod_date, rec_name, c_name FROM pallets JOIN orders USING (order_id) JOIN customers USING (c_name) WHERE prod_date BETWEEN ? AND ?;";
 		ArrayList<Pallet> pallets = new ArrayList<Pallet>();
 		try (PreparedStatement ps = conn.prepareStatement(query)) {
 			ps.setString(1, startDate);
@@ -156,7 +157,7 @@ public class DBAccess {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				pallets.add(new Pallet(rs.getInt("pallet_id"), rs.getInt("status"), rs.getString("prod_date"),
-						rs.getString("rec_name")));
+						rs.getString("rec_name"), rs.getString("c_name")));
 			}
 			rs.close();
 		} catch (SQLException e) {
@@ -280,13 +281,13 @@ public class DBAccess {
 	 */
 	public ArrayList<Pallet> searchRecipe(String recipe) {
 		ArrayList<Pallet> ret = new ArrayList<Pallet>();
-		String query = "SELECT * FROM pallets WHERE rec_name = ?;";
+		String query = "SELECT * FROM pallets JOIN orders USING (order_id) JOIN customers USING (c_name) WHERE rec_name = ?;";
 		try (PreparedStatement ps = conn.prepareStatement(query)) {
 			ps.setString(1, recipe);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				ret.add(new Pallet(rs.getInt("pallet_id"), rs.getInt("status"), rs.getString("prod_date"),
-						rs.getString("rec_name")));
+						rs.getString("rec_name"), rs.getString("c_name")));
 			}
 			rs.close();
 
@@ -312,7 +313,7 @@ public class DBAccess {
 			while (rs.next()) {
 				int i = rs.getInt("cnt");
 				System.out.println(i);
-				if ( i == 0) {
+				if (i == 0) {
 					return false;
 				}
 			}
@@ -322,6 +323,60 @@ public class DBAccess {
 			return false;
 		}
 
+	}
+
+	public ArrayList<Pallet> showAllBlocked() {
+		ArrayList<Pallet> ret = new ArrayList<Pallet>();
+		String query = "SELECT * FROM pallets JOIN orders USING (order_id) JOIN customers USING (c_name) WHERE status = 2;";
+		try (PreparedStatement ps = conn.prepareStatement(query)) {
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				ret.add(new Pallet(rs.getInt("pallet_id"), rs.getInt("status"), rs.getString("prod_date"),
+						rs.getString("rec_name"), rs.getString("c_name")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		return ret;
+	}
+
+	public ArrayList<Pallet> searchRecipesBetweenWithRecipient(String rec_name, String startDate, String endDate,
+			String recipient) {
+		ArrayList<Pallet> ret = new ArrayList<Pallet>();
+		String query = "SELECT * FROM pallets JOIN orders USING (order_id) JOIN customers USING (c_name) WHERE rec_name = ? AND c_name = ? AND prod_date BETWEEN ? AND ?;";
+		try (PreparedStatement ps = conn.prepareStatement(query)) {
+			ps.setString(1, rec_name);
+			ps.setString(2, recipient);
+			ps.setString(3, startDate);
+			ps.setString(4, endDate);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				ret.add(new Pallet(rs.getInt("pallet_id"), rs.getInt("status"), rs.getString("prod_date"),
+						rs.getString("rec_name"), rs.getString("c_name")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return ret;
+	}
+
+	public ArrayList<Pallet> searchRecipient(String recipient) {
+		ArrayList<Pallet> ret = new ArrayList<Pallet>();
+		String query = "SELECT * FROM pallets JOIN orders USING (order_id) JOIN customers USING (c_name) WHERE c_name = ?";
+		try(PreparedStatement ps = conn.prepareStatement(query)){
+			ps.setString(1, recipient);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				ret.add(new Pallet(rs.getInt("pallet_id"), rs.getInt("status"), rs.getString("prod_date"),
+						rs.getString("rec_name"), rs.getString("c_name")));
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+			
+		}
+		return ret;
 	}
 
 }

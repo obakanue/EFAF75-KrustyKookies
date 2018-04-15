@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import SearchController.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -8,18 +9,21 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SearchController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SearchController">
    <children>
-      <TextField fx:id="txtID" layoutX="26.0" layoutY="65.0" onMouseClicked="#txtIDOnClick" onKeyPressed="#txtIDOnClick" />
+      <TextField fx:id="txtID" layoutX="26.0" layoutY="65.0" onKeyPressed="#txtIDOnClick" onMouseClicked="#txtIDOnClick" />
       <Text layoutX="26.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PALLET SEARCH" wrappingWidth="117.7490234375" />
       <Text layoutX="26.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID-search:" />
-      <TextField fx:id="txtProd" layoutX="26.0" layoutY="132.0" onMouseClicked="#txtProdOnClick" onKeyPressed="#txtProdOnClick"/>
+      <TextField fx:id="txtProd" layoutX="26.0" layoutY="132.0" onKeyPressed="#txtProdOnClick" onMouseClicked="#txtProdOnClick" />
       <Text layoutX="26.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product:" />
       <Text layoutX="26.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time span:" />
-      <TextField fx:id="txtTimeStart" layoutX="26.0" layoutY="200.0" onMouseClicked="#txtTimeStartOnClick" onKeyPressed="#txtTimeStartOnClick" prefHeight="25.0" prefWidth="89.0" />
-      <TextField fx:id="txtTimeEnd" layoutX="144.0" layoutY="200.0" onMouseClicked="#txtTimeEndOnClick" onKeyPressed="#txtTimeEndOnClick" prefHeight="25.0" prefWidth="89.0" />
+      <TextField fx:id="txtTimeStart" layoutX="26.0" layoutY="200.0" onKeyPressed="#txtTimeStartOnClick" onMouseClicked="#txtTimeStartOnClick" prefHeight="25.0" prefWidth="89.0" />
+      <TextField fx:id="txtTimeEnd" layoutX="144.0" layoutY="200.0" onKeyPressed="#txtTimeEndOnClick" onMouseClicked="#txtTimeEndOnClick" prefHeight="25.0" prefWidth="89.0" />
       <Text layoutX="121.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to" />
-      <Button fx:id="btnSearch" layoutX="28.0" layoutY="266.0" mnemonicParsing="false" onAction="#btnSearchOnClick" text="Search" />
-      <ListView fx:id="lvPallets" layoutX="328.0" layoutY="17.0" prefHeight="372.0" prefWidth="257.0" />
+      <Button fx:id="btnSearch" layoutX="28.0" layoutY="303.0" mnemonicParsing="false" onAction="#btnSearchOnClick" text="Search" />
+      <ListView fx:id="lvPallets" layoutX="328.0" layoutY="17.0" prefHeight="372.0" prefWidth="390" />
+      <TextField fx:id="txtRecipient" layoutX="26.0" layoutY="260.0" />
+      <Label layoutX="26.0" layoutY="243.0" text="Recipient:" />
+      <Button fx:id="btnBlocked" layoutX="101.0" layoutY="303.0" mnemonicParsing="false" onAction="#btnSearchBlocked" text="Show all blocked" />
    </children>
 </AnchorPane>
