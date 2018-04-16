@@ -57,14 +57,8 @@ sqlite3 krusty-db.sqlite < initial-data.sql
 
 ## How to compile and run the program
 
-This section should give a few simple commands to type to
-compile and run the program from the command line, such as:
-
-```shell
-./gradlew run
-```
-
-or
+Before compiling and running the program make sure you have the latest version of openJDK and openJFX installed.
+To run the program run the following commands after downloading the repositry:
 
 ```shell
 javac -d bin/ -cp src src/krusty/Main.java
