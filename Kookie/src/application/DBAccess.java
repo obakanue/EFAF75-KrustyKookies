@@ -351,7 +351,7 @@ public class DBAccess {
 			ps.setString(3, startDate);
 			ps.setString(4, endDate);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				ret.add(new Pallet(rs.getInt("pallet_id"), rs.getInt("status"), rs.getString("prod_date"),
 						rs.getString("rec_name"), rs.getString("c_name")));
 			}
@@ -365,16 +365,32 @@ public class DBAccess {
 	public ArrayList<Pallet> searchRecipient(String recipient) {
 		ArrayList<Pallet> ret = new ArrayList<Pallet>();
 		String query = "SELECT * FROM pallets JOIN orders USING (order_id) JOIN customers USING (c_name) WHERE c_name = ?";
-		try(PreparedStatement ps = conn.prepareStatement(query)){
+		try (PreparedStatement ps = conn.prepareStatement(query)) {
 			ps.setString(1, recipient);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				ret.add(new Pallet(rs.getInt("pallet_id"), rs.getInt("status"), rs.getString("prod_date"),
 						rs.getString("rec_name"), rs.getString("c_name")));
 			}
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
-			
+
+		}
+		return ret;
+	}
+
+	public ArrayList<Pallet> showPalletsDeliveredTo(String recipient) {
+		ArrayList<Pallet> ret = new ArrayList<Pallet>();
+		String query = "SELECT * FROM pallets JOIN orders USING (order_id) JOIN customers USING (c_name) WHERE c_name = ? AND status = 3";
+		try (PreparedStatement ps = conn.prepareStatement(query)) {
+			ps.setString(1, recipient);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				ret.add(new Pallet(rs.getInt("pallet_id"), rs.getInt("status"), rs.getString("prod_date"),
+						rs.getString("rec_name"), rs.getString("c_name")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return ret;
 	}

@@ -48,6 +48,12 @@ public class SearchController {
 		txtID.clear();
 	}
 
+	public void btnSearchDelivered() {
+		if (!txtRecipient.getText().equals("")) {
+			lvPallets.setItems(FXCollections.observableArrayList(db.showPalletsDeliveredTo(txtRecipient.getText())));
+		}
+	}
+
 	public void btnSearchBlocked() {
 		lvPallets.setItems(FXCollections.observableArrayList(db.showAllBlocked()));
 	}

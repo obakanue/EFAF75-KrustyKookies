@@ -24,6 +24,7 @@
       <ListView fx:id="lvPallets" layoutX="328.0" layoutY="17.0" prefHeight="372.0" prefWidth="390" />
       <TextField fx:id="txtRecipient" layoutX="26.0" layoutY="260.0" />
       <Label layoutX="26.0" layoutY="243.0" text="Recipient:" />
-      <Button fx:id="btnBlocked" layoutX="101.0" layoutY="303.0" mnemonicParsing="false" onAction="#btnSearchBlocked" text="Show all blocked" />
+      <Button fx:id="btnBlocked" layoutX="84.0" layoutY="303.0" mnemonicParsing="false" onAction="#btnSearchBlocked" text="Search blocked" />
+      <Button fx:id="btnDelivered" layoutX="185.0" layoutY="303.0" mnemonicParsing="false" onAction="#btnSearchDelivered" text="Search delivered" />
    </children>
 </AnchorPane>
