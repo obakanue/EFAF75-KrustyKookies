@@ -58,21 +58,13 @@ sqlite3 krusty-db.sqlite < initial-data.sql
 ## How to compile and run the program
 
 Before compiling and running the program make sure you have the latest version of openJDK and openJFX installed.
-To run the program run the following commands after downloading the repositry:
+To run the program run the following commands after downloading the repositry and navigating to the folder ETAF75-KrustyKookies:
 
 ```shell
-javac -d bin/ -cp src src/krusty/Main.java
-java -cp bin:sqlite-jdbc.jar krusty.Main
+javac -d bin/ -cp src Kookie/src/application/Main.java 
+java -cp bin:Kookie/sqlite-jdbc-3.21.0.jar application.Main 
+
 ```
-
-or, if you put your commands into a `Makefile`:
-
-```shell
-make compile
-make run
-```
-
-The next section shows how this can be done.
 
 
 <hr>
