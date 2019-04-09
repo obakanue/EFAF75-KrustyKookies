@@ -14,7 +14,7 @@ We solved this project on our own, except for:
 
 ## ER-design
 
-The model is in the file [`Krusty Kookie AB UMLv3.png`](https://gitlab.com/Taff3r/ETAF75-KrustyKookies/raw/master/Krusty%20Kookie%20AB%20UMLv3.png):
+The model is in the file [`Krusty Kookie AB UMLv3.png`](https://github.com/obakanue/EFAF75-KrustyKookies/blob/master/Krusty%20Kookie%20AB%20UMLv3.png?raw=true):
 
 <center>
     <img src="https://github.com/obakanue/EFAF75-KrustyKookies/blob/master/Krusty%20Kookie%20AB%20UMLv3.png?raw=true" width="100%">
